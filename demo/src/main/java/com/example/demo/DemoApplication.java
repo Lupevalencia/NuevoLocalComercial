@@ -159,7 +159,7 @@ while(opcion != 0){
                             System.out.println("numero vendedor: " + listaVentas.get(i).getNumeroVendedor());
                             System.out.println("codigo: " + listaVentas.get(i).getCodigo());
                             System.out.println("cantidad: " + listaVentas.get(i).getCantidadVendidaProducto());
-                            System.out.println("precio final venta = " + listaVentas.get(i).getPrecioFinalVenta());
+                            //System.out.println("precio final venta = " + listaVentas.get(i).getPrecioFinalVenta());
                             System.out.println("-- Fin Venta --");
                         }
                         break;
@@ -179,9 +179,16 @@ while(opcion != 0){
                         int codigo_Producto_verificar = Integer.parseInt(codigo_Producto_verificar_String);
                         
                         Optional<Venta> ventaAVerificar = localComercial.obtenerVentaPorVendedorYCodigo(numero_Vendedor_verificar, codigo_Producto_verificar);
-                        System.out.println("La venta buscada es la siguiente : " + ventaAVerificar.get());
+                        Venta ventaEncontrada = ventaAVerificar.get();
+                        System.out.println("-- Venta buscada --");
+                        System.out.println("id: " + ventaEncontrada.getIdVenta());
+                        System.out.println("fechaVenta: " + ventaEncontrada.getFechaVenta());
+                        System.out.println("numeroVendedor: " + ventaEncontrada.getNumeroVendedor());
+                        System.out.println("codigoProducto: " + ventaEncontrada.getCodigo());
+                        System.out.println("cantidadVendidaProducto: " + ventaEncontrada.getCantidadVendidaProducto());
+                        System.out.println("formaPago: " + ventaEncontrada.getFormaPago());
                         
-                         //Venta ventaEncontrada = ventaAVerificar.get();
+                         
                         //while(ventaAVerificar) Tengo que validar que si no lo encuentra devuelve un error
                         
                         
@@ -210,11 +217,21 @@ while(opcion != 0){
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
                         
                         Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar); //NECESITA UN BUCLE ANIDDO PARA ESTO??
-                        System.out.println("El producto buscado es: ");
-                        Producto productoBuscado = productoABorrar.get();
-                        
-                        localComercial.borrarProducto(id_Producto_Borrar);
-                        System.out.println("El producto se ha borrado correctamente  ");
+                        if(productoABorrar != null){
+                            Producto productoBuscado = productoABorrar.get();
+                            System.out.println("El producto buscado es: ");
+                            System.out.println("id: " + productoBuscado.getIdProducto());
+                            System.out.println("codigoProducto: " + productoBuscado.getCodigo());
+                            System.out.println("descripcion: " + productoBuscado.getDescripcion());
+                            System.out.println("precioUnitario: " + productoBuscado.getPrecio());
+
+
+                            localComercial.borrarProducto(id_Producto_Borrar);
+                            System.out.println("El producto se ha borrado correctamente  ");
+                        }else{
+                            System.out.println("El producto no existe ");
+                        }
+                        break;
                     
                 case 9:
                        String id_actualizar_Producto_String = " ";
@@ -229,12 +246,15 @@ while(opcion != 0){
                        Producto productoEncontrado = productoAActualizar.get();
                        
                        String descripcionNueva = "1234";
-                       while(!descripcionNueva.matches("^[A-Za-z ]*$")){
+                       while(!descripcionNueva.matches("^[A-Za-z ]*$")){  
                             System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
                             descripcionNueva = scanner.nextLine();
                         }                       
                        productoEncontrado.setDescripcion(descripcionNueva);
                        localComercial.ingresarProductos(productoEncontrado);
+                       System.out.println("Producto modificado con éxito ");
+                       
+                       break;
                        
                 case 0:
                         System.out.println("Hasta pronto!!");

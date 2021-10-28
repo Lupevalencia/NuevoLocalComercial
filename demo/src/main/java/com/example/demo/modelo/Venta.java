@@ -21,28 +21,28 @@ public class Venta {
     int cantidadVendidaProducto;
     int formaPago;  // Efectivo: 0 ; Débito: 1 ; Tarjeta: 2
     // //necesito este atributo aunque esto tiene que calcularlo con el precio del producto y no pidiéndoselo al usuario por teclado
-    float precioFinalVenta;
+   // float precioFinalVenta;
     
     public Venta() {
     }
 
-    public Venta(Date fechaVenta, int numeroVendedor, int codigoProducto, int cantidadVendidaProducto, int formaPago) {
+    public Venta(Date fechaVenta, int numeroVendedor, int codigoProducto, int cantidadVendidaProducto, int formaPago /*float precioFinalVenta*/) {
         this.fechaVenta = fechaVenta;
         this.numeroVendedor = numeroVendedor;
         this.codigoProducto = codigoProducto;
         this.cantidadVendidaProducto = cantidadVendidaProducto;
         this.formaPago = formaPago;
-        this.precioFinalVenta = 0;
+        //this.precioFinalVenta = precioFinalVenta;
     }    
     
-    public Venta(int idVenta, Date fechaVenta, int numeroVendedor, int codigoProducto, int cantidadVendidaProducto, int formaPago, float precioFinalVenta) {
+    public Venta(int idVenta, Date fechaVenta, int numeroVendedor, int codigoProducto, int cantidadVendidaProducto, int formaPago /*float precioFinalVenta*/) {
         this.idVenta = idVenta;
         this.fechaVenta = fechaVenta;
         this.numeroVendedor = numeroVendedor;
         this.codigoProducto = codigoProducto;
         this.cantidadVendidaProducto = cantidadVendidaProducto;
         this.formaPago = formaPago;
-        this.precioFinalVenta = precioFinalVenta;
+        //this.precioFinalVenta = precioFinalVenta;
     }    
 
     
@@ -95,19 +95,10 @@ public class Venta {
         this.formaPago = formaPago;
     }
 
-    public float getPrecioFinalVenta() {
-        return precioFinalVenta;
-    }
-
-    public void setPrecioFinalVenta(float precioFinalVenta) {
-        this.precioFinalVenta = precioFinalVenta;
-    }
-
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", fechaVenta=" + fechaVenta + ", numeroVendedor=" + numeroVendedor + ", codigoProducto=" + codigoProducto + ", cantidadVendidaProducto=" + cantidadVendidaProducto + ", formaPago=" + formaPago + ", precioFinalVenta=" + precioFinalVenta + '}';
+        return "Venta{" + "idVenta=" + idVenta + ", fechaVenta=" + fechaVenta + ", numeroVendedor=" + numeroVendedor + ", codigoProducto=" + codigoProducto + ", cantidadVendidaProducto=" + cantidadVendidaProducto + ", formaPago=" + formaPago + '}';
     }
-
 
 
    
