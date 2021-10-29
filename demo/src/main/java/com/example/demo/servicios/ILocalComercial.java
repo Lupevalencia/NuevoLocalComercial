@@ -74,4 +74,6 @@ public interface ILocalComercial {
     Optional<Venta> comprobarVentaPorId(int idVenta);
     Optional<Producto> comprobarProductoPorId (int idProducto);
     Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
+    
+    List<Producto> listaDeProductos();
 }

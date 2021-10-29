@@ -1,5 +1,6 @@
 package com.example.demo.servicios;
 
+import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Venta;
 import java.util.List;
 import java.util.Optional;
@@ -62,5 +63,6 @@ public interface IVenta extends JpaRepository<Venta, Integer> { //Cuidado con es
 "on tabla1.codigo_producto = tabla2.codigo_producto;",nativeQuery = true)
     public float VentaMayorTarjetaCredito();
     
+
     
 }

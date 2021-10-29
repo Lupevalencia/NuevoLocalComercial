@@ -145,6 +145,7 @@ public class LocalComercialImpl implements ILocalComercial{
 
     @Override
     public Optional<Producto> comprobarProductoPorId(int idProducto) {
+
         Optional<Producto> producto = datoProductos.findById(idProducto);
         return producto;
     }
@@ -154,10 +155,14 @@ public class LocalComercialImpl implements ILocalComercial{
         Optional<Vendedor> vendedor = datoVendedor.findById(idVendedor);
         return vendedor;
     }
+
+    @Override
+    public List<Producto> listaDeProductos() {
+        //list<Producto> listaProductos = datp
+        return null;
+    }
+
+
   
-   
-   
-   
-   
    
 }

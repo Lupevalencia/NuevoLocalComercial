@@ -47,6 +47,11 @@ while(opcion != 0){
                         + "0. Salir");
         opcion = Integer.parseInt(scanner.nextLine());
 
+
+  
+        
+        
+       
         switch (opcion) {
                 case 1: //El id no se pide por teclado, es autoincremento
                         String codigoProductoString = " ";
@@ -80,8 +85,15 @@ while(opcion != 0){
 
                 case 2:
                         //El id no se pide por teclado, es autoincremento
+                        List<Producto> listadoDeProductos = localComercial.listaDeProductos();
+                        System.out.println("-- LISTA DE PRODUCTOS A LA VENTA");
+                            for(int i = 0; i<listadoDeProductos.size(); i++){
+                                        System.out.println("-- PRODUCTO Nº --" + i + " " + listadoDeProductos.get(i).getIdProducto() + listadoDeProductos.get(i).getCodigo() + listadoDeProductos.get(i).getPrecio());
+                        }
+                        System.out.println("-- FIN DE PRODUCTOS A LA VENTA -- \n");
+                        
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                        System.out.println("Introduce la fecha de Venta del producto: ");
+                        System.out.println("Introduce la fecha de Venta del producto en el siguiente formato (dd/MM/yyyy): ");
                         String fechaVentaString = scanner.nextLine();
                         Date fechaVenta = null;
                         try {
@@ -91,14 +103,14 @@ while(opcion != 0){
                         }
 
                         String numeroVendedorString = " ";
-                        while(localComercial.comprobarNumeroTeclado(numeroVendedorString)){
-                            System.out.println("Introduce el número del vendedor que va a realizar la venta de este producto: ");
+                        while(/*localComercial.comprobarNumeroTeclado(numeroVendedorString) &&*/ !numeroVendedorString.equals("1") && !numeroVendedorString.equals("2") && !numeroVendedorString.equals("3")){
+                            System.out.println("Introduce el número del vendedor que va a realizar la venta de este producto (1- JUAN PEREZ GARCIA; 2- MANUEL ALBERTO MARTINEZ SANCHEZ; 3- JESUS DE LA CUEVA RODARTE): ");
                             numeroVendedorString = scanner.nextLine();
                         }
                         int numeroVendedor = Integer.parseInt(numeroVendedorString);
 
                         
-                         // AQUÍ DEBEMOS DE VALIDAR QUE EXISTE EL PRODUCTO QUE SE DESEA VENDER EN EL LOCAL COMERCIAL (CON BBDD NO??) O SI LO ESCRIBIMOS MAL
+                         // AQUÍ DEBEMOS DE VALIDAR QUE EXISTE EL PRODUCTO QUE SE DESEA VENDER EN EL LOCAL COMERCIAL (CON BOOLEAN)
                         String codigoString = " ";
                         while(localComercial.comprobarNumeroTeclado(codigoString)){
                             System.out.println("Introduce el codigo del producto que va a ser vendido: ");
@@ -217,6 +229,8 @@ while(opcion != 0){
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
                         
                         Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar); //NECESITA UN BUCLE ANIDDO PARA ESTO??
+                        
+                        
                         if(productoABorrar != null){
                             Producto productoBuscado = productoABorrar.get();
                             System.out.println("El producto buscado es: ");
@@ -228,9 +242,10 @@ while(opcion != 0){
 
                             localComercial.borrarProducto(id_Producto_Borrar);
                             System.out.println("El producto se ha borrado correctamente  ");
-                        }else{
+                       }else{
                             System.out.println("El producto no existe ");
-                        }
+                        
+                       }
                         break;
                     
                 case 9:
@@ -242,14 +257,18 @@ while(opcion != 0){
                        int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
                        
                        Optional<Producto> productoAActualizar = localComercial.comprobarProductoPorId(id_Producto_actualizar);
-                       System.out.println("El producto que se desea actualizar es: ");
+                       System.out.println("El producto que se desea actualizar: ");
                        Producto productoEncontrado = productoAActualizar.get();
                        
-                       String descripcionNueva = "1234";
-                       while(!descripcionNueva.matches("^[A-Za-z ]*$")){  
+                       System.out.println("productoEncontrado = " + productoEncontrado.toString());
+                       
+                       String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
+                       
+                       while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>70 ){  
                             System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
                             descripcionNueva = scanner.nextLine();
-                        }                       
+                            
+                       }                       
                        productoEncontrado.setDescripcion(descripcionNueva);
                        localComercial.ingresarProductos(productoEncontrado);
                        System.out.println("Producto modificado con éxito ");
