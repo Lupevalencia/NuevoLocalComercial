@@ -226,7 +226,7 @@ while(opcion != 0){
                         }
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
                         
-                        Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar); //NECESITA UN BUCLE ANIDDO PARA ESTO??
+                        Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar);
                         
                         
                         if(productoABorrar != null){
@@ -262,7 +262,7 @@ while(opcion != 0){
                        
                        String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
                        
-                       while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>70 ){  
+                       while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>50 ){
                             System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
                             descripcionNueva = scanner.nextLine();
                             
