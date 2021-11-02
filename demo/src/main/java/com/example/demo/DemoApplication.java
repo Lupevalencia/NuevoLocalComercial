@@ -220,8 +220,8 @@ while(opcion != 0){
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
                        // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR.
                         String id_borrar_Producto_String = " ";
-                        while(localComercial.comprobarNumeroTeclado(id_borrar_Producto_String)){
-                            System.out.println("Introduce el id del producto que deseas borrar:");
+                        while(localComercial.comprobarNumeroTeclado(id_borrar_Producto_String) && localComercial.comprobarProductoPorId(id_borrar_Producto_String)){
+                            System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
                             id_borrar_Producto_String = scanner.nextLine();
                         }
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
@@ -229,9 +229,9 @@ while(opcion != 0){
                         Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar);
                         
                         
-                        if(productoABorrar != null){
+                        /*if(productoABorrar != null){*/
                             Producto productoBuscado = productoABorrar.get();
-                            System.out.println("El producto buscado es: ");
+                            System.out.println("El producto buscado es: \n");
                             System.out.println("id: " + productoBuscado.getIdProducto());
                             System.out.println("codigoProducto: " + productoBuscado.getCodigo());
                             System.out.println("descripcion: " + productoBuscado.getDescripcion());
@@ -239,11 +239,11 @@ while(opcion != 0){
 
 
                             localComercial.borrarProducto(id_Producto_Borrar);
-                            System.out.println("El producto se ha borrado correctamente  ");
-                       }else{
-                            System.out.println("El producto no existe ");
+                            System.out.println("El producto se ha borrado correctamente. \n");
+                       //}else{
+                         //   System.out.println("El producto no existe ");
                         
-                       }
+                      // }
                         break;
                     
                 case 9:

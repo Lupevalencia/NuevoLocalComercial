@@ -145,10 +145,13 @@ public class LocalComercialImpl implements ILocalComercial{
     }
 
     @Override
-    public Optional<Producto> comprobarProductoPorId(int idProducto) {
-
-        Optional<Producto> producto = datoProductos.findById(idProducto);
-        return producto;
+    public boolean comprobarProductoPorId(int idProducto) {
+        try {
+            datoProductos.findById(idProducto);
+            return false;
+        }catch(NoSuchElementException e) {
+            return true;
+        }
     }
 
     @Override
