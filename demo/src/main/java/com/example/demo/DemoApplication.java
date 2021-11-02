@@ -29,7 +29,7 @@ public class DemoApplication {
     
     @PostConstruct  //Hemos necesitado hacer esto porque nos daba error . Internet
     public void init(){
-          int opcion = -1;  //NO VOLVER A UTILIZAR VAR
+          int opcion = -1;  //NO VOLVER A UTILIZAR VARRGGRH
           Scanner scanner = new Scanner(System.in);
 
 while(opcion != 0){

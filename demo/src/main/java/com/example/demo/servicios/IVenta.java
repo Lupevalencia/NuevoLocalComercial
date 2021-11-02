@@ -35,7 +35,7 @@ public interface IVenta extends JpaRepository<Venta, Integer> { //Cuidado con es
     @Query(value = "select * from ventas where numero_vendedor = :numero_vendedor and codigo_producto = :codigo_producto",nativeQuery = true)
     
     public Optional<Venta> obtenerVentaPorVendedorYCodigo(@Param("numero_vendedor") Integer numero_vendedor, @Param("codigo_producto") Integer codigo_producto);
-    //public Optional<Venta> obtenerVentaPorVendedorYCodigo(int numeroVendedor, int codigoProducto);
+    //public Optional<Venta> obtenerVentaPorVendedorYCodigo(int numeroVendedor, int codigoProducto); HOLA
     
     
     @Query(value = "select round(sum(precio_final_venta),2) from \n" +
