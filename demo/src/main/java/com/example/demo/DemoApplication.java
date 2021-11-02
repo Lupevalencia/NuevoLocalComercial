@@ -9,10 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 
@@ -255,7 +253,7 @@ while(opcion != 0){
                             id_actualizar_Producto_String = scanner.nextLine();
                        }
                        int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
-                       
+
                        Optional<Producto> productoAActualizar = localComercial.comprobarProductoPorId(id_Producto_actualizar);
                        System.out.println("El producto que se desea actualizar: ");
                        Producto productoEncontrado = productoAActualizar.get();

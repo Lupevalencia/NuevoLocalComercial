@@ -13,8 +13,8 @@ public interface IVendedor extends JpaRepository<Vendedor, Integer> {
     
     @Query(value = "SELECT count(ventas.numero_vendedor) as numero_total_ventas, nombre_vendedor \n" +
     "FROM ventas\n" +
-    "inner join vendedores ON (vendedores.id_vendedor = ventas.numero_vendedor)\n" +
-    "group by id_vendedor",nativeQuery = true)    
+    "inner join vendedores ON (ventas.numero_vendedor = vendedores.id_vendedor)\n" +
+    "group by vendedores.numero_vendedor",nativeQuery = true)
     public List<Vendedor> VentasRealizadasPorVendedores();
     
     
