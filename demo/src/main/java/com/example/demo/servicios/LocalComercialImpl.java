@@ -163,7 +163,7 @@ public class LocalComercialImpl implements ILocalComercial{
     @Override
     public List<Producto> listaDeProductos() {
         //list<Producto> listaProductos = datp
-        return null;
+        return datoProductos.listaDeProductos();
     }
 
 

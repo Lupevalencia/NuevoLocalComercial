@@ -111,7 +111,7 @@ while(opcion != 0){
                          // AQUÍ DEBEMOS DE VALIDAR QUE EXISTE EL PRODUCTO QUE SE DESEA VENDER EN EL LOCAL COMERCIAL (CON BOOLEAN)
                         String codigoString = " ";
                         while(localComercial.comprobarNumeroTeclado(codigoString)){
-                            System.out.println("Introduce el codigo del producto que va a ser vendido: ");
+                            System.out.println("Introduce el codigo del producto que va a ser vendido. Recuerda que dicho código se corresponde con el id del producto a vender.\n");
                             codigoString = scanner.nextLine();
                         }
                         int codigo = Integer.parseInt(codigoString);
@@ -226,7 +226,7 @@ while(opcion != 0){
                         }
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
                         
-                        Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar);
+                        //Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar);
                         
                         
                         /*if(productoABorrar != null){*/
@@ -247,29 +247,29 @@ while(opcion != 0){
                         break;
                     
                 case 9:
-                       String id_actualizar_Producto_String = " ";
-                       while(localComercial.comprobarNumeroTeclado(id_actualizar_Producto_String)){
-                            System.out.println("Introduce el id del producto que deseas actualizar:"); 
-                            id_actualizar_Producto_String = scanner.nextLine();
-                       }
-                       int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
+                       //String id_actualizar_Producto_String = " ";
+                       //while(localComercial.comprobarNumeroTeclado(id_actualizar_Producto_String)){
+                         //   System.out.println("Introduce el id del producto que deseas actualizar:");
+                           // id_actualizar_Producto_String = scanner.nextLine();
+                       //}
+                       //int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
 
-                       Optional<Producto> productoAActualizar = localComercial.comprobarProductoPorId(id_Producto_actualizar);
-                       System.out.println("El producto que se desea actualizar: ");
-                       Producto productoEncontrado = productoAActualizar.get();
+                       //Optional<Producto> productoAActualizar = localComercial.comprobarProductoPorId(id_Producto_actualizar);
+                       //System.out.println("El producto que se desea actualizar: ");
+                       //Producto productoEncontrado = productoAActualizar.get();
                        
-                       System.out.println("productoEncontrado = " + productoEncontrado.toString());
+                       //System.out.println("productoEncontrado = " + productoEncontrado.toString());
                        
-                       String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
+                       //String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
                        
-                       while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>50 ){
-                            System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
-                            descripcionNueva = scanner.nextLine();
+                       //while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>50 ){
+                         //   System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
+                           // descripcionNueva = scanner.nextLine();
                             
-                       }                       
-                       productoEncontrado.setDescripcion(descripcionNueva);
-                       localComercial.ingresarProductos(productoEncontrado);
-                       System.out.println("Producto modificado con éxito ");
+                       //}
+                       //productoEncontrado.setDescripcion(descripcionNueva);
+                       //localComercial.ingresarProductos(productoEncontrado);
+                       //System.out.println("Producto modificado con éxito ");
                        
                        break;
                        
