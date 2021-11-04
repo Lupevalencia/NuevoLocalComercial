@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProductos extends JpaRepository<Producto, Integer> {
     
-    @Query(value = "select * from productos\n",nativeQuery = true)
-    public List<Producto> listaDeProductos();
+   // @Query(value = "select * from productos\n",nativeQuery = true)
+    //public List<Producto> listaDeProductos();
     
 }
 

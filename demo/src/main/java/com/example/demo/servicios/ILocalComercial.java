@@ -56,7 +56,7 @@ public interface ILocalComercial {
     float VentaMayorTarjetaCredito();
 
     
-    //Optional<Producto> obtenerProductoPorId(int id); //Nos pide que devolvamos una lista, sino da error. Le pasamos el id deseado
+    Optional<Producto> obtenerProductoPorId(int id); //Nos pide que devolvamos una lista, sino da error. Le pasamos el id deseado
     //También nos vale, para buscarlo y mostrarlo, buscarlo y y actualizarlo, buscarlo y borrarlo
     void borrarProducto(int id);
     
@@ -67,15 +67,15 @@ public interface ILocalComercial {
     //String comprobarCodigoProducto(String codigoAComprobar);
     
     Optional<Venta> obtenerVentaPorVendedorYCodigo(int numero_vendedor, int codigo_producto);
-    
+
     List<Vendedor> VentasRealizadasPorVendedores();
     
     
-    Optional<Venta> comprobarVentaPorId(int idVenta);
+    //Optional<Venta> comprobarVentaPorId(int idVenta);
 
-    boolean comprobarProductoPorId (int idProducto);
+    boolean comprobarProductoPorIdVentas(String idProducto);
 
-    Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
+    //Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
     
     List<Producto> listaDeProductos();
 }

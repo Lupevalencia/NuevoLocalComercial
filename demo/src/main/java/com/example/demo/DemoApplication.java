@@ -130,7 +130,8 @@ while(opcion != 0){
                             System.out.println("Introduce la forma de pago con la que desea abonar esta venta(0- Efectivo; 1- Débito; 2- Tarjeta ): ");
                             formaPagoString = scanner.nextLine();
                         }
-                        int formaPago = Integer.parseInt(formaPagoString );
+                        int formaPago = Integer.parseInt(formaPagoString);
+
 
                         Venta ventaAAgregar = new Venta(fechaVenta,numeroVendedor,codigo,cantidadVendidaProducto,formaPago);
                         
@@ -146,7 +147,7 @@ while(opcion != 0){
                         //Devolver el número del vendedor que realizó mayor cantidad de ventas
                         //vendedor =localComercial.
                         
-                        //Devuelve el número de ventas realizadas por cada vendedor
+                        //Devuelve el número de ventas realizadas por cada vendedor. NECESITO DEVOLVER TODOS LOS CAMPOS????
                         List<Vendedor> listadoVentasRealizadas = localComercial.VentasRealizadasPorVendedores();
                         System.out.println("-- Listado de ventas realizadas por los vendedores del Local Comercial --");
                             for(int i = 0; i<listadoVentasRealizadas.size(); i++){
@@ -179,7 +180,7 @@ while(opcion != 0){
                         //AQUÍ TAMBIÉN DEBERÍA DE CONTROLAR SI EXISTE EL ID Y EL CODIGO QUE SE PIDEN POR TECLADO EN LAS DIFERENTES TABLAS
                         String numero_Vendedor_verificar_String = " ";
                         String codigo_Producto_verificar_String = "hola";
-                        while(localComercial.comprobarNumeroTeclado(numero_Vendedor_verificar_String) && localComercial.comprobarNumeroTeclado(codigo_Producto_verificar_String)){
+                        while(localComercial.comprobarNumeroTeclado(numero_Vendedor_verificar_String) && localComercial.comprobarProductoPorIdVentas(codigo_Producto_verificar_String)){
                             System.out.println("Introduce el numero del vendedor cuya venta deseas verificar:");
                             numero_Vendedor_verificar_String = scanner.nextLine();
                             System.out.println("Introduce el codigo del producto cuya venta deseas verificar");
@@ -189,6 +190,7 @@ while(opcion != 0){
                         int codigo_Producto_verificar = Integer.parseInt(codigo_Producto_verificar_String);
                         
                         Optional<Venta> ventaAVerificar = localComercial.obtenerVentaPorVendedorYCodigo(numero_Vendedor_verificar, codigo_Producto_verificar);
+
                         Venta ventaEncontrada = ventaAVerificar.get();
                         System.out.println("-- Venta buscada --");
                         System.out.println("id: " + ventaEncontrada.getIdVenta());
@@ -220,13 +222,13 @@ while(opcion != 0){
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
                        // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR.
                         String id_borrar_Producto_String = " ";
-                        while(localComercial.comprobarNumeroTeclado(id_borrar_Producto_String) && localComercial.comprobarProductoPorId(id_borrar_Producto_String)){
+                        while(localComercial.comprobarNumeroTeclado(id_borrar_Producto_String) && localComercial.comprobarProductoPorIdVentas(id_borrar_Producto_String)){
                             System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
                             id_borrar_Producto_String = scanner.nextLine();
                         }
                         int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
                         
-                        //Optional<Producto> productoABorrar = localComercial.comprobarProductoPorId(id_Producto_Borrar);
+                        Optional<Producto> productoABorrar = localComercial.obtenerProductoPorId(id_Producto_Borrar);
                         
                         
                         /*if(productoABorrar != null){*/

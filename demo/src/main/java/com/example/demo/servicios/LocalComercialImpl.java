@@ -71,11 +71,11 @@ public class LocalComercialImpl implements ILocalComercial{
     
     
     
-    //@Override
-    //public Optional<Producto> obtenerProductoPorId(int id) {
-      //   Optional<Producto> p = datoProductos.findById(id);
-       //  return p;
-   // }
+    @Override
+    public Optional<Producto> obtenerProductoPorId(int id) {
+        Optional<Producto> p = datoProductos.findById(id);
+        return p;
+    }
     
     //@Override
     //public Optional<Venta> obtenerVentaPorId(int id) {
@@ -138,32 +138,31 @@ public class LocalComercialImpl implements ILocalComercial{
         return datoVendedor.VentasRealizadasPorVendedores();
     }    
 
-    @Override
-    public Optional<Venta> comprobarVentaPorId(int idVenta) {  //ESTO DEVOLVERÍA UNA EXCEPCIÓN EN CASO DE ERROR??
-        Optional<Venta> venta = datoVenta.findById(idVenta);
-        return venta;
-    }
+    //@Override
+    //public Optional<Venta> comprobarVentaPorId(int idVenta) {  //ESTO DEVOLVERÍA UNA EXCEPCIÓN EN CASO DE ERROR??
+      //  Optional<Venta> venta = datoVenta.findById(idVenta);
+        //return venta;
+    //}
 
     @Override
-    public boolean comprobarProductoPorId(int idProducto) {
+    public boolean comprobarProductoPorIdVentas(String idProducto) {
         try {
-            datoProductos.findById(idProducto);
+            datoVenta.findById(Integer.valueOf(idProducto));
             return false;
         }catch(NoSuchElementException e) {
             return true;
         }
     }
 
-    @Override
-    public Optional<Vendedor> comprobarVendedorPorId(int idVendedor) {
-        Optional<Vendedor> vendedor = datoVendedor.findById(idVendedor);
-        return vendedor;
-    }
+   // @Override
+    //public Optional<Vendedor> comprobarVendedorPorId(int idVendedor) {
+      //  Optional<Vendedor> vendedor = datoVendedor.findById(idVendedor);
+        //return vendedor;
+    //}
 
     @Override
     public List<Producto> listaDeProductos() {
-        //list<Producto> listaProductos = datp
-        return datoProductos.listaDeProductos();
+        return datoProductos.findAll(); //findAll para listar y para buscar por clave primaria
     }
 
 
