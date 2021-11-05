@@ -27,7 +27,7 @@ public class DemoApplication {
     
     @PostConstruct  //Hemos necesitado hacer esto porque nos daba error . Internet
     public void init(){
-          int opcion = -1;  //NO VOLVER A UTILIZAR VARRGGRH
+          int opcion = -1;
           Scanner scanner = new Scanner(System.in);
 
 while(opcion != 0){
@@ -42,6 +42,10 @@ while(opcion != 0){
                         + "7. Mostrar los datos de la venta de mayor importe abonada con tarjeta de crédito.\n"
                         + "8. Borrar un producto.\n"
                         + "9. Actualizar un producto determinado.\n"
+                        + "10. Calcular el monto total de ventas de un determinado mes.\n"
+                        + "11. Mostrar el nombre de los vendedores que compartan X dígitos en su dni.\n"
+                        + "12. Mostrar la menor venta abonada en efectivo.\n"
+                        + "13. Producto más vendido en el local.\n"
                         + "0. Salir");
         opcion = Integer.parseInt(scanner.nextLine());
 
@@ -220,13 +224,19 @@ while(opcion != 0){
                         break;     
                         
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
-                       // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR.
-                        String id_borrar_Producto_String = " ";
-                        while(localComercial.comprobarNumeroTeclado(id_borrar_Producto_String) && localComercial.comprobarProductoPorIdVentas(id_borrar_Producto_String)){
-                            System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
-                            id_borrar_Producto_String = scanner.nextLine();
+                       // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR
+                    boolean identificadorOK = false;
+                    while (identificadorOK){
+                        System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
+                        String id_borrar_Producto = scanner.nextLine();
+                        if(localComercial.comprobarNumeroTeclado(id_borrar_Producto) && localComercial.comprobarProductoPorIdVentas(id_borrar_Producto)){
+                            identificadorOK = true;
+                            int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto); //Deberia pasarle el entero al método aunque si no es un entero igual no va
+
                         }
-                        int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto_String);
+
+                    }
+
                         
                         Optional<Producto> productoABorrar = localComercial.obtenerProductoPorId(id_Producto_Borrar);
                         
@@ -247,7 +257,6 @@ while(opcion != 0){
                         
                       // }
                         break;
-                    
                 case 9:
                        //String id_actualizar_Producto_String = " ";
                        //while(localComercial.comprobarNumeroTeclado(id_actualizar_Producto_String)){
@@ -274,7 +283,17 @@ while(opcion != 0){
                        //System.out.println("Producto modificado con éxito ");
                        
                        break;
-                       
+                case 10:
+
+                    break;
+
+                case 11:
+
+                    break;
+
+                case 12:
+                    break;
+
                 case 0:
                         System.out.println("Hasta pronto!!");
                         break;

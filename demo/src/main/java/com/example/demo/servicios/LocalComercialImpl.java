@@ -99,20 +99,19 @@ public class LocalComercialImpl implements ILocalComercial{
     public boolean comprobarNumeroTeclado(String codigo) {
         try{
             Integer.parseInt(codigo);
-            return false;
-        }catch(NumberFormatException e){
-            //System.out.println("ERROR. No se ha introducido el valor esperado");
             return true;
+        }catch(NumberFormatException e){
+            return false;
         }        
     }
     @Override
     public boolean comprobarFloatTeclado(String precio) {
         try{
             Float.parseFloat(precio);
-            return false;
+            return true;
         }catch(NumberFormatException e){
             //System.out.println("ERROR. No se ha introducido el valor esperado");
-            return true;
+            return false;
         }        
     }
 
@@ -146,12 +145,14 @@ public class LocalComercialImpl implements ILocalComercial{
 
     @Override
     public boolean comprobarProductoPorIdVentas(String idProducto) {
+        System.out.println("idProducto = " + idProducto);
         try {
             datoVenta.findById(Integer.valueOf(idProducto));
-            return false;
-        }catch(NoSuchElementException e) {
             return true;
+        }catch(NoSuchElementException e) {
+            return false;
         }
+
     }
 
    // @Override
