@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -23,6 +24,6 @@ public interface IVendedor extends JpaRepository<Vendedor, Integer> {
     @Query(value = "select numero_vendedor, nombre_vendedor, dni_vendedor\n" +
     "from vendedores\n" +
     "where dni_vendedor like :digitosDniVendedor%",nativeQuery = true)
-    public List<Vendedor> vendedorDniBuscado(@Parameter("digitosDniVendedor") int digitosDniVendedor);
+    public List<Vendedor> vendedorDniBuscado(@Param("digitosDniVendedor") int digitosDniVendedor);
     
 }

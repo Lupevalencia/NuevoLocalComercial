@@ -78,6 +78,25 @@ public interface IVenta extends JpaRepository<Venta, Integer> { //Cuidado con es
 "FROM productos\n" +
 "INNER JOIN ventas ON (productos.id_producto = ventas.codigo_producto)) tabla2\n" +
  "on tabla1.codigo_producto = tabla2.codigo_producto;",nativeQuery = true)
-    public float montoTotalMes(@Parameter("fechaInicial") Date fechaInicial, @Parameter("fechaFin") Date fechaFin);
-    
+    public float montoTotalMes(@Param("fechaInicial") Date fechaInicial, @Param("fechaFin") Date fechaFin);
+
+
+
+  @Query(value = "select min(precio_final_venta) from \n" +
+"(select codigo_producto, cantidad_vendida_producto, forma_pago\n" +
+"from ventas\n" +
+"where forma_pago = 0\n" +
+"order by numero_vendedor) tabla1\n" +
+"inner join\n" +
+"(SELECT ventas.codigo_producto, round(precio_unitario * cantidad_Vendida_producto,2) as precio_final_venta, precio_unitario\n" +
+"FROM productos\n" +
+"INNER JOIN ventas ON (productos.id_producto = ventas.codigo_producto)) tabla2\n" +
+"on tabla1.codigo_producto = tabla2.codigo_producto;",nativeQuery = true)
+    public float menorVentaEfectivo();
+
+
+  @Query(value = "select max(cantidad_vendida_producto)\n" +
+          "from ventas\n" +
+          "inner join productos on (ventas.codigo_producto = productos.id_producto)",nativeQuery = true)
+    public int cantidadProuctoMasVendido();
 }

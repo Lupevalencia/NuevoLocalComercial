@@ -173,11 +173,21 @@ public class LocalComercialImpl implements ILocalComercial{
         return datoVenta.montoTotalMes(fechaInicial, fechaFin);
     }
 
-    //HACER AQUÍ EL TRY CATCH Y CONTINUAR EN EL MENU
-    public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor){
-        return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+
+    public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor) {
+       // try {
+            return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+        //}catch(NoSuchElementException e){
+          //  e.printStackTrace();
+            //return null;
+        //}
     }
 
+    public float menorVentaEfectivo(){
+        return datoVenta.menorVentaEfectivo();
+    }
 
-   
+    public int cantidadProuctoMasVendido(){
+        return datoVenta.cantidadProuctoMasVendido();
+    }
 }

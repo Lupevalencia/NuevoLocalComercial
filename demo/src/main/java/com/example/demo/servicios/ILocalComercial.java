@@ -86,4 +86,8 @@ public interface ILocalComercial {
     //boolean comprobarParteDni(int digitosDniVendedor);
 
     List<Vendedor> vendedorDniBuscado(int digitosDniVendedor);
+
+    float menorVentaEfectivo();
+
+    int cantidadProuctoMasVendido();
 }

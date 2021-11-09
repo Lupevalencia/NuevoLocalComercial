@@ -316,17 +316,30 @@ while(opcion != 0){
                     }
                     int dniVendedor = Integer.parseInt(dniVendedorString);
 
+                    if(localComercial.vendedorDniBuscado(dniVendedor)== null){
+                        System.out.println("El dni introducido no corresponde a ningún vendedor");
 
-                    if(digitosDniOK)
-                    List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
+                    }else{
+                        List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
+                        Vendedor VendedoresEncontradosDni = listaVendedoresDniBuscado.get(dniVendedor);
+                        System.out.println("Los vendedores cuyo dni comienza por los digitos introducidos son:\n");
+                        System.out.println("NumeroVendedor: " + VendedoresEncontradosDni.getNumeroVendedor());
+                        System.out.println("NombreVendedor: " + VendedoresEncontradosDni.getNombreVendedor());
+                        System.out.println("DniVendedor: " + VendedoresEncontradosDni.getDniVendedor());
+
+                    }
 
                     break;
 
                 case 12:
+                        float menorVentaEfectivo = localComercial.menorVentaEfectivo();
+                        System.out.println("La menor venta abonada en efectivo de este Local Comercial es:" + menorVentaEfectivo);
+
                     break;
 
-                case 13:
-
+                case 13: //LO VOY HACER DEVOLVIENDO LA VENTA QUE SE HA REALIZADO CON MAYOR CANTIDAD DE PRODUCTOS VENDIDA, PERO SI TUVIESE QUE HACERLO MOSTRANDO OTROS CAMPOS????
+                        int cantidadProductoMasVendida = localComercial.cantidadProuctoMasVendido();
+                    System.out.println("La venta que más cantidad de producto ha vendido ha sido con un total de " + cantidadVendidaProducto + " " + "unidades");
                     break;
 
                 case 0:
