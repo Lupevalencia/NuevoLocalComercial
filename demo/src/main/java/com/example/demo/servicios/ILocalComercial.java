@@ -4,6 +4,8 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +55,7 @@ public interface ILocalComercial {
     /**
      * Mostrar los datos de la mayor venta abonada con tarjetade crédito
      */
-    float VentaMayorTarjetaCredito();
+    float ventaMayorTarjetaCredito();
 
     
     Optional<Producto> obtenerProductoPorId(int id); //Nos pide que devolvamos una lista, sino da error. Le pasamos el id deseado
@@ -68,7 +70,7 @@ public interface ILocalComercial {
     
     Optional<Venta> obtenerVentaPorVendedorYCodigo(int numero_vendedor, int codigo_producto);
 
-    List<Vendedor> VentasRealizadasPorVendedores();
+    List<Vendedor> ventasRealizadasPorVendedores();
     
     
     //Optional<Venta> comprobarVentaPorId(int idVenta);
@@ -78,4 +80,10 @@ public interface ILocalComercial {
     //Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
     
     List<Producto> listaDeProductos();
+
+    float montoTotalMes(Date fechaInicial, Date fechaFin);
+
+    //boolean comprobarParteDni(int digitosDniVendedor);
+
+    List<Vendedor> vendedorDniBuscado(int digitosDniVendedor);
 }

@@ -7,6 +7,8 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -127,14 +129,14 @@ public class LocalComercialImpl implements ILocalComercial{
     } 
     
     @Override
-    public float VentaMayorTarjetaCredito() {
-        return datoVenta.VentaMayorTarjetaCredito();
+    public float ventaMayorTarjetaCredito() {
+        return datoVenta.ventaMayorTarjetaCredito();
     }
     
     @Override
-   public List<Vendedor> VentasRealizadasPorVendedores() {
+   public List<Vendedor> ventasRealizadasPorVendedores() {
         //return null; // provisional
-        return datoVendedor.VentasRealizadasPorVendedores();
+        return datoVendedor.ventasRealizadasPorVendedores();
     }    
 
     //@Override
@@ -167,6 +169,15 @@ public class LocalComercialImpl implements ILocalComercial{
     }
 
 
-  
+    public float montoTotalMes(Date fechaInicial, Date fechaFin){
+        return datoVenta.montoTotalMes(fechaInicial, fechaFin);
+    }
+
+    //HACER AQUÍ EL TRY CATCH Y CONTINUAR EN EL MENU
+    public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor){
+        return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+    }
+
+
    
 }

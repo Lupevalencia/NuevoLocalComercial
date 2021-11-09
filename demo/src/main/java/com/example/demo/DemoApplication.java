@@ -95,7 +95,7 @@ while(opcion != 0){
                         System.out.println("-- FIN DE PRODUCTOS A LA VENTA -- \n");
                         
                         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                        System.out.println("Introduce la fecha de Venta del producto en el siguiente formato (dd/MM/yyyy): ");
+                        System.out.println("Introduce la fecha de Venta de uno de los productos anteriores en el siguiente formato (dd/MM/yyyy): ");
                         String fechaVentaString = scanner.nextLine();
                         Date fechaVenta = null;
                         try {
@@ -151,11 +151,11 @@ while(opcion != 0){
                         //Devolver el número del vendedor que realizó mayor cantidad de ventas
                         //vendedor =localComercial.
                         
-                        //Devuelve el número de ventas realizadas por cada vendedor. NECESITO DEVOLVER TODOS LOS CAMPOS????
-                        List<Vendedor> listadoVentasRealizadas = localComercial.VentasRealizadasPorVendedores();
+                        //Devuelve el número de ventas realizadas por cada vendedor. NECESITO DEVOLVER TODOS LOS CAMPOS???? CREAR UNA NUEVA CLASE
+                        List<Vendedor> listadoVentasRealizadas = localComercial.ventasRealizadasPorVendedores();
                         System.out.println("-- Listado de ventas realizadas por los vendedores del Local Comercial --");
                             for(int i = 0; i<listadoVentasRealizadas.size(); i++){
-                                System.out.println("numero vendedor: " + listadoVentasRealizadas.get(i).getNumeroTotalVentas());
+                                //System.out.println("numero vendedor: " + listadoVentasRealizadas.get(i).getNumeroTotalVentas());
                                 System.out.println("precio final venta = " + listadoVentasRealizadas.get(i).getNombreVendedor());
                                 System.out.println("-- Fin Ventas Realizadas --");
                         }
@@ -217,7 +217,7 @@ while(opcion != 0){
                         break;
                 case 7:
                         //Devuelve los datos de la venta de mayor importe de la venta abonada con tarjeta de crédito
-                        float ventaMayorTarjeta = localComercial.VentaMayorTarjetaCredito();
+                        float ventaMayorTarjeta = localComercial.ventaMayorTarjetaCredito();
                         System.out.println("La venta de mayor importe abonada con tarjeta de crédito es: " + ventaMayorTarjeta);
                        
                                 
@@ -226,19 +226,17 @@ while(opcion != 0){
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
                        // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR
                     boolean identificadorOK = false;
+                    int idProductoBorrar= 0;
                     while (identificadorOK){
                         System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
-                        String id_borrar_Producto = scanner.nextLine();
-                        if(localComercial.comprobarNumeroTeclado(id_borrar_Producto) && localComercial.comprobarProductoPorIdVentas(id_borrar_Producto)){
+                        String idProducto = scanner.nextLine();
+                        if(localComercial.comprobarNumeroTeclado(idProducto) && localComercial.comprobarProductoPorIdVentas(idProducto)){
+                            idProductoBorrar = Integer.parseInt(idProducto);
                             identificadorOK = true;
-                            int id_Producto_Borrar = Integer.parseInt(id_borrar_Producto); //Deberia pasarle el entero al método aunque si no es un entero igual no va
-
                         }
-
                     }
 
-                        
-                        Optional<Producto> productoABorrar = localComercial.obtenerProductoPorId(id_Producto_Borrar);
+                    Optional<Producto> productoABorrar = localComercial.obtenerProductoPorId(idProductoBorrar);
                         
                         
                         /*if(productoABorrar != null){*/
@@ -250,7 +248,7 @@ while(opcion != 0){
                             System.out.println("precioUnitario: " + productoBuscado.getPrecio());
 
 
-                            localComercial.borrarProducto(id_Producto_Borrar);
+                            localComercial.borrarProducto(idProductoBorrar);
                             System.out.println("El producto se ha borrado correctamente. \n");
                        //}else{
                          //   System.out.println("El producto no existe ");
@@ -284,14 +282,51 @@ while(opcion != 0){
                        
                        break;
                 case 10:
+                    System.out.println("Introduce el mes para el cuál desea calcular el monto total de ventas realizadas.\n");
+                    SimpleDateFormat formato1 = new SimpleDateFormat("dd/MM/yyyy");
+                    System.out.println("Por un lado, introduce la fecha de inicio del mes que desea en el siguiente formato (dd/MM/yyyy).");
+                    String fechaInicialString = scanner.nextLine();
+                    Date fechaInicialMes = null;
+                    try {
+                        fechaInicialMes = formato1.parse(fechaInicialString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+                    System.out.println("Por otro lado, introduce la fecha fin de mes que desea en el siguiente formato (dd/MM/yyyy)");
+                    String fechaFinString = scanner.nextLine();
+                    Date fechaFinMes = null;
+                    try {
+                        fechaFinMes = formato2.parse(fechaFinString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    float montoMensual = localComercial.montoTotalMes(fechaInicialMes,fechaFinMes);
+                    System.out.println("El monto total para el mes introducido es: " + montoMensual);
 
                     break;
 
                 case 11:
+                    String dniVendedorString = " ";
+                    while(localComercial.comprobarNumeroTeclado(dniVendedorString)) {
+                        System.out.println("Introduce los 4 primeros dígitos (números) del dni del vendedor cuyo nombre deseas buscar: ");
+                        dniVendedorString = scanner.nextLine();
+                    }
+                    int dniVendedor = Integer.parseInt(dniVendedorString);
+
+
+                    if(digitosDniOK)
+                    List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
 
                     break;
 
                 case 12:
+                    break;
+
+                case 13:
+
                     break;
 
                 case 0:
