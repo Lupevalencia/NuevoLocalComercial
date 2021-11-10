@@ -91,4 +91,6 @@ public interface ILocalComercial {
     float menorVentaEfectivo();
 
     int cantidadProuctoMasVendido();
+
+    Optional<Venta> comprobarCodigoVendido(int codigo);
 }

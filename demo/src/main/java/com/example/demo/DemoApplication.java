@@ -234,6 +234,7 @@ while(opcion != 0){
 
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
                        // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR
+
                     List<Producto> listadoDeProductosDeNuevo = localComercial.listaDeProductos();
                     System.out.println("-- LISTA DE PRODUCTOS A LA VENTA");
                     for(int i = 0; i<listadoDeProductosDeNuevo.size(); i++){
@@ -254,8 +255,9 @@ while(opcion != 0){
                         String idProducto = scanner.nextLine();
                         if(localComercial.comprobarNumeroTeclado(idProducto) && localComercial.comprobarProductoPorId(idProducto)){
                             idProductoBorrar = Integer.parseInt(idProducto);
+                            /*&& !localComercial.comprobarCodigoVendido(idProducto)  */ //TENGO QUE PREGUNTARLE AQUÍ PARA PODER PASARLE UN INT Y DESPUÉS COMPROBAR
                             identificadorOK = true;
-                            //System.out.println("El id intruducido está en el formato correcto pero se ha encontrado una venta asociada a dicho producto y no se puede borrar");
+
                         }
                     }
 

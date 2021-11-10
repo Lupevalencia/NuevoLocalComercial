@@ -100,4 +100,11 @@ public interface IVenta extends JpaRepository<Venta, Integer> { //Cuidado con es
           "from ventas\n" +
           "inner join productos on (ventas.codigo_producto = productos.id_producto)",nativeQuery = true)
     public int cantidadProuctoMasVendido();
+
+
+
+
+    @Query(value = "select * from ventas where codigo_producto = :codigo",nativeQuery = true)
+    public Optional<Venta> comprobarCodigoVendido(@Param("codigo") Integer codigo);
+    //Esto devuelve una venta y yo necesito que cuando la devuelva muestre la venta y vuelva a pedir un id porque no se puede borrar y si no devuelve la venta entonces entra en el if
 }

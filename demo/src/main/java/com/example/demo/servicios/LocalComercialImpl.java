@@ -84,12 +84,6 @@ public class LocalComercialImpl implements ILocalComercial{
         return p;
     }
     
-    //@Override
-    //public Optional<Venta> obtenerVentaPorId(int id) {
-      //   Optional<Venta> v = datoVenta.findById(id);
-        // return v;
-    //}
-    
     //8
     @Override
     public void borrarProducto(int id) {
@@ -194,5 +188,12 @@ public class LocalComercialImpl implements ILocalComercial{
 
     public int cantidadProuctoMasVendido(){
         return datoVenta.cantidadProuctoMasVendido();
+    }
+
+
+    @Override
+    public Optional<Venta> comprobarCodigoVendido(int codigo) {
+        Optional<Venta> v = datoVenta.comprobarCodigoVendido(Integer.valueOf(codigo));
+        return v;
     }
 }
