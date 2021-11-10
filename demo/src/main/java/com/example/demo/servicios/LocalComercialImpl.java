@@ -7,11 +7,13 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+import com.example.demo.modelo.VentaVendedor;
 
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,9 @@ public class LocalComercialImpl implements ILocalComercial{
 
     @Autowired
     IVendedor datoVendedor;
+
+    @Autowired
+    IVentaVendedor datoVentaVendedor;
 
     @Override
     public void ingresarProductos(Producto productoAAgregar) {
@@ -102,7 +107,7 @@ public class LocalComercialImpl implements ILocalComercial{
         try{
             Integer.parseInt(codigo);
             return true;
-        }catch(NumberFormatException e){
+        }catch(Exception e){
             return false;
         }        
     }
@@ -110,10 +115,9 @@ public class LocalComercialImpl implements ILocalComercial{
     public boolean comprobarFloatTeclado(String precio) {
         try{
             Float.parseFloat(precio);
-            return true;
-        }catch(NumberFormatException e){
-            //System.out.println("ERROR. No se ha introducido el valor esperado");
             return false;
+        }catch(Exception e){
+            return true;
         }        
     }
 
@@ -125,6 +129,7 @@ public class LocalComercialImpl implements ILocalComercial{
     
     @Override
     public float montoTotalVentas() {
+
         return datoVenta.montoTotalVentas();
     } 
     
@@ -134,9 +139,9 @@ public class LocalComercialImpl implements ILocalComercial{
     }
     
     @Override
-   public List<Vendedor> ventasRealizadasPorVendedores() {
+   public List<VentaVendedor> ventasRealizadasPorVendedores() {
         //return null; // provisional
-        return datoVendedor.ventasRealizadasPorVendedores();
+        return datoVentaVendedor.ventasRealizadasPorVendedores();
     }    
 
     //@Override
@@ -146,10 +151,10 @@ public class LocalComercialImpl implements ILocalComercial{
     //}
 
     @Override
-    public boolean comprobarProductoPorIdVentas(String idProducto) {
-        System.out.println("idProducto = " + idProducto);
+    public boolean comprobarProductoPorId(String idProducto) {
+        //System.out.println("idProducto = " + idProducto);
         try {
-            datoVenta.findById(Integer.valueOf(idProducto));
+            datoProductos.findById(Integer.valueOf(idProducto));
             return true;
         }catch(NoSuchElementException e) {
             return false;
@@ -175,7 +180,7 @@ public class LocalComercialImpl implements ILocalComercial{
 
 
     public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor) {
-       // try {
+        //try {
             return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
         //}catch(NoSuchElementException e){
           //  e.printStackTrace();

@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+import com.example.demo.modelo.VentaVendedor;
 import com.example.demo.servicios.ILocalComercial;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -90,7 +91,12 @@ while(opcion != 0){
                         List<Producto> listadoDeProductos = localComercial.listaDeProductos();
                         System.out.println("-- LISTA DE PRODUCTOS A LA VENTA");
                             for(int i = 0; i<listadoDeProductos.size(); i++){
-                                        System.out.println("-- PRODUCTO Nº --" + i + " " + listadoDeProductos.get(i).getIdProducto() + listadoDeProductos.get(i).getCodigo() + listadoDeProductos.get(i).getPrecio());
+                                System.out.println("-- PRODUCTO Nº: " + listadoDeProductos.size());
+                                System.out.println("idProducto: " + listadoDeProductos.get(i).getIdProducto());
+                                System.out.println("codigoProducto" + listadoDeProductos.get(i).getCodigo());
+                                System.out.println("descripcionProducto " + listadoDeProductos.get(i).getDescripcion());
+                                System.out.println("precioUnitario " + listadoDeProductos.get(i).getPrecio());
+                                System.out.println("\n");
                         }
                         System.out.println("-- FIN DE PRODUCTOS A LA VENTA -- \n");
                         
@@ -140,7 +146,7 @@ while(opcion != 0){
                         Venta ventaAAgregar = new Venta(fechaVenta,numeroVendedor,codigo,cantidadVendidaProducto,formaPago);
                         
                         localComercial.ingresarVentas(ventaAAgregar);
-                        System.out.println("La venta se ha insertado con éxito");
+                        System.out.println("La venta se ha insertado con éxito.\n");
                         
                         break;
                 case 3:
@@ -150,14 +156,15 @@ while(opcion != 0){
                         //prod2.(ya puedo acceder a todos los campos que quiera y hacer el get.())
                         //Devolver el número del vendedor que realizó mayor cantidad de ventas
                         //vendedor =localComercial.
-                        
-                        //Devuelve el número de ventas realizadas por cada vendedor. NECESITO DEVOLVER TODOS LOS CAMPOS???? CREAR UNA NUEVA CLASE
-                        List<Vendedor> listadoVentasRealizadas = localComercial.ventasRealizadasPorVendedores();
+
+
+                        List<VentaVendedor> listadoVentasRealizadas = localComercial.ventasRealizadasPorVendedores();
                         System.out.println("-- Listado de ventas realizadas por los vendedores del Local Comercial --");
                             for(int i = 0; i<listadoVentasRealizadas.size(); i++){
-                                //System.out.println("numero vendedor: " + listadoVentasRealizadas.get(i).getNumeroTotalVentas());
-                                System.out.println("precio final venta = " + listadoVentasRealizadas.get(i).getNombreVendedor());
-                                System.out.println("-- Fin Ventas Realizadas --");
+                                System.out.println("-- VENTA --");
+                                System.out.println("Numero total de ventas realizadas: " + listadoVentasRealizadas.get(i).getNumeroTotalVentas());
+                                System.out.println("Nombre del vendedor: " + listadoVentasRealizadas.get(i).getNombreVendedor());
+                                System.out.println("\n");
                         }
                         
                         break;
@@ -184,7 +191,7 @@ while(opcion != 0){
                         //AQUÍ TAMBIÉN DEBERÍA DE CONTROLAR SI EXISTE EL ID Y EL CODIGO QUE SE PIDEN POR TECLADO EN LAS DIFERENTES TABLAS
                         String numero_Vendedor_verificar_String = " ";
                         String codigo_Producto_verificar_String = "hola";
-                        while(localComercial.comprobarNumeroTeclado(numero_Vendedor_verificar_String) && localComercial.comprobarProductoPorIdVentas(codigo_Producto_verificar_String)){
+                        while(localComercial.comprobarNumeroTeclado(numero_Vendedor_verificar_String) && localComercial.comprobarNumeroTeclado(codigo_Producto_verificar_String)){
                             System.out.println("Introduce el numero del vendedor cuya venta deseas verificar:");
                             numero_Vendedor_verificar_String = scanner.nextLine();
                             System.out.println("Introduce el codigo del producto cuya venta deseas verificar");
@@ -203,6 +210,7 @@ while(opcion != 0){
                         System.out.println("codigoProducto: " + ventaEncontrada.getCodigo());
                         System.out.println("cantidadVendidaProducto: " + ventaEncontrada.getCantidadVendidaProducto());
                         System.out.println("formaPago: " + ventaEncontrada.getFormaPago());
+                        System.out.println("\n");
                         
                          
                         //while(ventaAVerificar) Tengo que validar que si no lo encuentra devuelve un error
@@ -213,26 +221,41 @@ while(opcion != 0){
                         // Devuelve el monto total de ventas realizadas por los vendedores
                         float montoTotal = localComercial.montoTotalVentas();
                         System.out.println("El monto total de ventas realizadas es:  " + montoTotal);
-                        
+                        System.out.println("\n\n");
+
                         break;
                 case 7:
                         //Devuelve los datos de la venta de mayor importe de la venta abonada con tarjeta de crédito
                         float ventaMayorTarjeta = localComercial.ventaMayorTarjetaCredito();
                         System.out.println("La venta de mayor importe abonada con tarjeta de crédito es: " + ventaMayorTarjeta);
-                       
-                                
-                        break;     
-                        
+                        System.out.println("\n\n");
+
+                        break;
+
                 case 8: //HAY QUE COMPROBAR PREVIAMENTE QUE ESE ID EXISTE DENTRO DE LA TABLA QUE SE DESEA ACTUALIZAR.
                        // AQUÍ PODRÍAMOS MOSTRAR ADEMÁS UNA LISTA DE LOS PRODUCTOS QUE HAY ANTES DE INTRODUCIR EL QUE DESEA BORRAR
+                    List<Producto> listadoDeProductosDeNuevo = localComercial.listaDeProductos();
+                    System.out.println("-- LISTA DE PRODUCTOS A LA VENTA");
+                    for(int i = 0; i<listadoDeProductosDeNuevo.size(); i++){
+
+                        System.out.println("-- PRODUCTO Nº: " + listadoDeProductosDeNuevo.size());
+                        System.out.println("idProducto: " + listadoDeProductosDeNuevo.get(i).getIdProducto());
+                        System.out.println("codigoProducto" + listadoDeProductosDeNuevo.get(i).getCodigo());
+                        System.out.println("descripcionProducto " + listadoDeProductosDeNuevo.get(i).getDescripcion());
+                        System.out.println("precioUnitario " + listadoDeProductosDeNuevo.get(i).getPrecio());
+                        System.out.println("\n");
+                    }
+                    System.out.println("-- FIN DE PRODUCTOS A LA VENTA -- \n");
+
                     boolean identificadorOK = false;
                     int idProductoBorrar= 0;
-                    while (identificadorOK){
+                    while (!identificadorOK){
                         System.out.println("Introduce el id del producto que deseas borrar. COMPRUEBE que dicho producto existe en este localComercial antes de INTENTAR BORRARLO:");
                         String idProducto = scanner.nextLine();
-                        if(localComercial.comprobarNumeroTeclado(idProducto) && localComercial.comprobarProductoPorIdVentas(idProducto)){
+                        if(localComercial.comprobarNumeroTeclado(idProducto) && localComercial.comprobarProductoPorId(idProducto)){
                             idProductoBorrar = Integer.parseInt(idProducto);
                             identificadorOK = true;
+                            //System.out.println("El id intruducido está en el formato correcto pero se ha encontrado una venta asociada a dicho producto y no se puede borrar");
                         }
                     }
 
@@ -256,29 +279,30 @@ while(opcion != 0){
                       // }
                         break;
                 case 9:
-                       //String id_actualizar_Producto_String = " ";
-                       //while(localComercial.comprobarNumeroTeclado(id_actualizar_Producto_String)){
-                         //   System.out.println("Introduce el id del producto que deseas actualizar:");
-                           // id_actualizar_Producto_String = scanner.nextLine();
-                       //}
-                       //int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
+                       String id_actualizar_Producto_String = " ";
+                       while(localComercial.comprobarNumeroTeclado(id_actualizar_Producto_String)){
+                            System.out.println("Introduce el id del producto que deseas actualizar:");
+                            id_actualizar_Producto_String = scanner.nextLine();
+                       }
+                       int id_Producto_actualizar = Integer.parseInt(id_actualizar_Producto_String);
 
-                       //Optional<Producto> productoAActualizar = localComercial.comprobarProductoPorId(id_Producto_actualizar);
-                       //System.out.println("El producto que se desea actualizar: ");
-                       //Producto productoEncontrado = productoAActualizar.get();
+                       Optional<Producto> productoAActualizar = localComercial.obtenerProductoPorId(id_Producto_actualizar);
+                       System.out.println("El producto que se desea actualizar: ");
+                       Producto productoEncontrado = productoAActualizar.get();
                        
-                       //System.out.println("productoEncontrado = " + productoEncontrado.toString());
+                       System.out.println("productoEncontrado = " + productoEncontrado.toString());
                        
-                       //String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
+                       String descripcionNueva = "1234132234345456523111165554545484841651511166466513120065131311651320311666303203201545610306565555661165165653565657787989834534564565667878685435353536577686781232234234";
                        
-                       //while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>50 ){
-                         //   System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
-                           // descripcionNueva = scanner.nextLine();
+                       while(!descripcionNueva.matches("^[A-Za-z ]*$") && descripcionNueva.length()>50 ){
+                            System.out.println("Introduce la nueva descripcion del producto que deseas actualizar: ");
+                            descripcionNueva = scanner.nextLine();
                             
-                       //}
-                       //productoEncontrado.setDescripcion(descripcionNueva);
-                       //localComercial.ingresarProductos(productoEncontrado);
-                       //System.out.println("Producto modificado con éxito ");
+                       }
+                       productoEncontrado.setDescripcion(descripcionNueva);
+                       localComercial.ingresarProductos(productoEncontrado);
+                       System.out.println("Producto modificado con éxito ");
+                       System.out.println("\n");
                        
                        break;
                 case 10:
@@ -305,6 +329,7 @@ while(opcion != 0){
 
                     float montoMensual = localComercial.montoTotalMes(fechaInicialMes,fechaFinMes);
                     System.out.println("El monto total para el mes introducido es: " + montoMensual);
+                    System.out.println("\n");
 
                     break;
 
@@ -316,10 +341,10 @@ while(opcion != 0){
                     }
                     int dniVendedor = Integer.parseInt(dniVendedorString);
 
-                    if(localComercial.vendedorDniBuscado(dniVendedor)== null){
-                        System.out.println("El dni introducido no corresponde a ningún vendedor");
+                    //if(localComercial.vendedorDniBuscado(dniVendedor)== null){
+                      //  System.out.println("El dni introducido no corresponde a ningún vendedor");
 
-                    }else{
+                    //}else{
                         List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
                         Vendedor VendedoresEncontradosDni = listaVendedoresDniBuscado.get(dniVendedor);
                         System.out.println("Los vendedores cuyo dni comienza por los digitos introducidos son:\n");
@@ -327,19 +352,22 @@ while(opcion != 0){
                         System.out.println("NombreVendedor: " + VendedoresEncontradosDni.getNombreVendedor());
                         System.out.println("DniVendedor: " + VendedoresEncontradosDni.getDniVendedor());
 
-                    }
+                   // }
 
                     break;
 
                 case 12:
                         float menorVentaEfectivo = localComercial.menorVentaEfectivo();
                         System.out.println("La menor venta abonada en efectivo de este Local Comercial es:" + menorVentaEfectivo);
+                        System.out.println("\n");
 
                     break;
 
                 case 13: //LO VOY HACER DEVOLVIENDO LA VENTA QUE SE HA REALIZADO CON MAYOR CANTIDAD DE PRODUCTOS VENDIDA, PERO SI TUVIESE QUE HACERLO MOSTRANDO OTROS CAMPOS????
                         int cantidadProductoMasVendida = localComercial.cantidadProuctoMasVendido();
-                    System.out.println("La venta que más cantidad de producto ha vendido ha sido con un total de " + cantidadVendidaProducto + " " + "unidades");
+                    System.out.println("La venta que más cantidad de producto ha vendido ha sido con un total de " + cantidadProductoMasVendida + " " + "unidades");
+                    System.out.println("\n");
+
                     break;
 
                 case 0:

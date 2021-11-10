@@ -4,6 +4,7 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+import com.example.demo.modelo.VentaVendedor;
 
 import java.util.Date;
 import java.util.List;
@@ -70,12 +71,12 @@ public interface ILocalComercial {
     
     Optional<Venta> obtenerVentaPorVendedorYCodigo(int numero_vendedor, int codigo_producto);
 
-    List<Vendedor> ventasRealizadasPorVendedores();
+    List<VentaVendedor> ventasRealizadasPorVendedores();
     
     
     //Optional<Venta> comprobarVentaPorId(int idVenta);
 
-    boolean comprobarProductoPorIdVentas(String idProducto);
+    boolean comprobarProductoPorId(String idProducto);
 
     //Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
     

@@ -6,6 +6,7 @@ import com.example.demo.modelo.Venta;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.*;
 
 import org.hibernate.annotations.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -71,7 +72,7 @@ public interface IVenta extends JpaRepository<Venta, Integer> { //Cuidado con es
     @Query(value = "select round(sum(precio_final_venta),2) from \n" +
 "(select codigo_producto, cantidad_vendida_producto, forma_pago\n" +
 "from ventas\n" +
-"where (fecha_venta between :fechaInicial and :fechaFin)\n" +
+"where (fecha_venta between :fechaInicial and :fechaFin )\n" +
 "order by numero_vendedor) tabla1\n" +
 "inner join\n" +
 "(SELECT ventas.codigo_producto, round(precio_unitario * cantidad_Vendida_producto,2) as precio_final_venta, precio_unitario\n" +
