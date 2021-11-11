@@ -337,7 +337,7 @@ while(opcion != 0){
 
                 case 11:
                     String dniVendedorString = " ";
-                    while(localComercial.comprobarNumeroTeclado(dniVendedorString)) {
+                    while(!localComercial.comprobarNumeroTeclado(dniVendedorString)) {
                         System.out.println("Introduce los 4 primeros dígitos (números) del dni del vendedor cuyo nombre deseas buscar: ");
                         dniVendedorString = scanner.nextLine();
                     }
@@ -347,13 +347,18 @@ while(opcion != 0){
                       //  System.out.println("El dni introducido no corresponde a ningún vendedor");
 
                     //}else{
-                        List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
-                        Vendedor VendedoresEncontradosDni = listaVendedoresDniBuscado.get(dniVendedor);
-                        System.out.println("Los vendedores cuyo dni comienza por los digitos introducidos son:\n");
-                        System.out.println("NumeroVendedor: " + VendedoresEncontradosDni.getNumeroVendedor());
-                        System.out.println("NombreVendedor: " + VendedoresEncontradosDni.getNombreVendedor());
-                        System.out.println("DniVendedor: " + VendedoresEncontradosDni.getDniVendedor());
 
+                    List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
+                    if(listaVendedoresDniBuscado.size() > 0) {
+                        for (Vendedor v : listaVendedoresDniBuscado) {
+                            System.out.println("Los vendedores cuyo dni comienza por los digitos introducidos son:\n");
+                            System.out.println("NumeroVendedor: " + v.getNumeroVendedor());
+                            System.out.println("NombreVendedor: " + v.getNombreVendedor());
+                            System.out.println("DniVendedor: " + v.getDniVendedor());
+                        }
+                    } else {
+                        System.out.println("No se ha encontrado el vendedor buscado.\n");
+                    }
                    // }
 
                     break;

@@ -175,7 +175,8 @@ public class LocalComercialImpl implements ILocalComercial{
 
     public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor) {
         //try {
-            return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+           // return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+        return datoVendedor.findByDniVendedorContaining(digitosDniVendedor + "");
         //}catch(NoSuchElementException e){
           //  e.printStackTrace();
             //return null;

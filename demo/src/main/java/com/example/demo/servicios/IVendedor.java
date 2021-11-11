@@ -15,9 +15,11 @@ import org.springframework.data.repository.CrudRepository;
 public interface IVendedor extends JpaRepository<Vendedor, Integer> {
 
     
-    @Query(value = "select numero_vendedor, nombre_vendedor, dni_vendedor\n" +
-    "from vendedores\n" +
-    "where dni_vendedor like :digitosDniVendedor%",nativeQuery = true)
+    @Query(value = "select numero_vendedor, nombre_vendedor, dni_vendedor " +
+    "from vendedores " +
+    "where dni_vendedor like '%:digitosDniVendedor%'",nativeQuery = true)
     public List<Vendedor> vendedorDniBuscado(@Param("digitosDniVendedor") Integer digitosDniVendedor);
+
+    List<Vendedor> findByDniVendedorContaining(String dni);
     
 }
