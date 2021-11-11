@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vendores")
+@Table(name = "vendedores")
 public class Vendedor{
     
     @Id
@@ -19,30 +19,30 @@ public class Vendedor{
     int numeroVendedor;
     String nombreVendedor;
     String dniVendedor;
-    int numeroTotalVentas;
+    //int numeroTotalVentas;
     
     public Vendedor() {
     }
 
-    public Vendedor(/*int idVendedor,*/String nombreVendedor) {
+    //public Vendedor(/*int idVendedor,*/String nombreVendedor) {
         //this.idVendedor = idVendedor;
-        this.nombreVendedor = nombreVendedor;
-        this.numeroTotalVentas = 0;
-    }
+      //  this.nombreVendedor = nombreVendedor;
+        //this.numeroTotalVentas = 0;
+    //}
     
     public Vendedor(int numeroVendedor, String nombreVendedor, String dniVendedor) {
         this.numeroVendedor = numeroVendedor;
         this.nombreVendedor = nombreVendedor;
         this.dniVendedor = dniVendedor;
-        this.numeroTotalVentas = 0;
+        //this.numeroTotalVentas = 0;
     } 
     
-    public Vendedor(int idVendedor, int numeroVendedor, String nombreVendedor, String dniVendedor,int numeroTotalVentas) {
+    public Vendedor(int idVendedor, int numeroVendedor, String nombreVendedor, String dniVendedor/*,int numeroTotalVentas*/) {
         this.idVendedor = idVendedor;
         this.numeroVendedor = numeroVendedor;
         this.nombreVendedor = nombreVendedor;
         this.dniVendedor = dniVendedor;
-        this.numeroTotalVentas = numeroTotalVentas;
+        //this.numeroTotalVentas = numeroTotalVentas;
     }
 
     public int getIdVendedor() {
@@ -77,17 +77,13 @@ public class Vendedor{
         this.dniVendedor = dniVendedor;
     }
 
-    public int getNumeroTotalVentas() {
-        return this.numeroTotalVentas;
-    }
-
-    public void setNumeroTotalVentas(int numeroTotalVentas) {
-        this.numeroTotalVentas = numeroTotalVentas;
-    }
-
     @Override
     public String toString() {
-        return "Vendedor{" + "idVendedor=" + idVendedor + ", numeroVendedor=" + numeroVendedor + ", nombreVendedor=" + nombreVendedor + ", dniVendedor=" + dniVendedor + ", numeroTotalVentas=" + numeroTotalVentas + '}';
-    }  
-    
+        return "Vendedor{" +
+                "idVendedor=" + idVendedor +
+                ", numeroVendedor=" + numeroVendedor +
+                ", nombreVendedor='" + nombreVendedor + '\'' +
+                ", dniVendedor='" + dniVendedor + '\'' +
+                '}';
+    }
 }

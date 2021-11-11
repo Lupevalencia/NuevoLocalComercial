@@ -4,6 +4,9 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+import com.example.demo.modelo.VentaVendedor;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,10 +56,10 @@ public interface ILocalComercial {
     /**
      * Mostrar los datos de la mayor venta abonada con tarjetade crédito
      */
-    float VentaMayorTarjetaCredito();
+    float ventaMayorTarjetaCredito();
 
     
-    //Optional<Producto> obtenerProductoPorId(int id); //Nos pide que devolvamos una lista, sino da error. Le pasamos el id deseado
+    Optional<Producto> obtenerProductoPorId(int id); //Nos pide que devolvamos una lista, sino da error. Le pasamos el id deseado
     //También nos vale, para buscarlo y mostrarlo, buscarlo y y actualizarlo, buscarlo y borrarlo
     void borrarProducto(int id);
     
@@ -67,13 +70,27 @@ public interface ILocalComercial {
     //String comprobarCodigoProducto(String codigoAComprobar);
     
     Optional<Venta> obtenerVentaPorVendedorYCodigo(int numero_vendedor, int codigo_producto);
+
+    List<VentaVendedor> ventasRealizadasPorVendedores();
     
-    List<Vendedor> VentasRealizadasPorVendedores();
     
-    
-    Optional<Venta> comprobarVentaPorId(int idVenta);
-    Optional<Producto> comprobarProductoPorId (int idProducto);
-    Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
+    //Optional<Venta> comprobarVentaPorId(int idVenta);
+
+    boolean comprobarProductoPorId(String idProducto);
+
+    //Optional<Vendedor> comprobarVendedorPorId(int idVendedor);
     
     List<Producto> listaDeProductos();
+
+    float montoTotalMes(Date fechaInicial, Date fechaFin);
+
+    //boolean comprobarParteDni(int digitosDniVendedor);
+
+    List<Vendedor> vendedorDniBuscado(int digitosDniVendedor);
+
+    float menorVentaEfectivo();
+
+    int cantidadProuctoMasVendido();
+
+    Optional<Venta> comprobarCodigoVendido(int codigo);
 }

@@ -26,6 +26,11 @@ public class Venta {
     public Venta() {
     }
 
+    public Venta(int numeroVendedor, int codigoProducto) {
+        this.numeroVendedor = numeroVendedor;
+        this.codigoProducto = codigoProducto;
+    }
+
     public Venta(Date fechaVenta, int numeroVendedor, int codigoProducto, int cantidadVendidaProducto, int formaPago /*float precioFinalVenta*/) {
         this.fechaVenta = fechaVenta;
         this.numeroVendedor = numeroVendedor;

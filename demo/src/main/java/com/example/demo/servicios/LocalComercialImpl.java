@@ -7,8 +7,13 @@ package com.example.demo.servicios;
 import com.example.demo.modelo.Producto;
 import com.example.demo.modelo.Vendedor;
 import com.example.demo.modelo.Venta;
+import com.example.demo.modelo.VentaVendedor;
+
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +32,9 @@ public class LocalComercialImpl implements ILocalComercial{
 
     @Autowired
     IVendedor datoVendedor;
+
+    @Autowired
+    IVentaVendedor datoVentaVendedor;
 
     @Override
     public void ingresarProductos(Producto productoAAgregar) {
@@ -70,17 +78,11 @@ public class LocalComercialImpl implements ILocalComercial{
     
     
     
-    //@Override
-    //public Optional<Producto> obtenerProductoPorId(int id) {
-      //   Optional<Producto> p = datoProductos.findById(id);
-       //  return p;
-   // }
-    
-    //@Override
-    //public Optional<Venta> obtenerVentaPorId(int id) {
-      //   Optional<Venta> v = datoVenta.findById(id);
-        // return v;
-    //}
+    @Override
+    public Optional<Producto> obtenerProductoPorId(int id) {
+        Optional<Producto> p = datoProductos.findById(id);
+        return p;
+    }
     
     //8
     @Override
@@ -98,10 +100,9 @@ public class LocalComercialImpl implements ILocalComercial{
     public boolean comprobarNumeroTeclado(String codigo) {
         try{
             Integer.parseInt(codigo);
-            return false;
-        }catch(NumberFormatException e){
-            //System.out.println("ERROR. No se ha introducido el valor esperado");
             return true;
+        }catch(Exception e){
+            return false;
         }        
     }
     @Override
@@ -109,8 +110,7 @@ public class LocalComercialImpl implements ILocalComercial{
         try{
             Float.parseFloat(precio);
             return false;
-        }catch(NumberFormatException e){
-            //System.out.println("ERROR. No se ha introducido el valor esperado");
+        }catch(Exception e){
             return true;
         }        
     }
@@ -123,46 +123,78 @@ public class LocalComercialImpl implements ILocalComercial{
     
     @Override
     public float montoTotalVentas() {
+
         return datoVenta.montoTotalVentas();
     } 
     
     @Override
-    public float VentaMayorTarjetaCredito() {
-        return datoVenta.VentaMayorTarjetaCredito();
+    public float ventaMayorTarjetaCredito() {
+        return datoVenta.ventaMayorTarjetaCredito();
     }
     
     @Override
-   public List<Vendedor> VentasRealizadasPorVendedores() {
+   public List<VentaVendedor> ventasRealizadasPorVendedores() {
         //return null; // provisional
-        return datoVendedor.VentasRealizadasPorVendedores();
+        return datoVentaVendedor.ventasRealizadasPorVendedores();
     }    
 
-    @Override
-    public Optional<Venta> comprobarVentaPorId(int idVenta) {  //ESTO DEVOLVERÍA UNA EXCEPCIÓN EN CASO DE ERROR??
-        Optional<Venta> venta = datoVenta.findById(idVenta);
-        return venta;
-    }
+    //@Override
+    //public Optional<Venta> comprobarVentaPorId(int idVenta) {  //ESTO DEVOLVERÍA UNA EXCEPCIÓN EN CASO DE ERROR??
+      //  Optional<Venta> venta = datoVenta.findById(idVenta);
+        //return venta;
+    //}
 
     @Override
-    public Optional<Producto> comprobarProductoPorId(int idProducto) {
+    public boolean comprobarProductoPorId(String idProducto) {
+        //System.out.println("idProducto = " + idProducto);
+        try {
+            datoProductos.findById(Integer.valueOf(idProducto));
+            return true;
+        }catch(NoSuchElementException e) {
+            return false;
+        }
 
-        Optional<Producto> producto = datoProductos.findById(idProducto);
-        return producto;
     }
 
-    @Override
-    public Optional<Vendedor> comprobarVendedorPorId(int idVendedor) {
-        Optional<Vendedor> vendedor = datoVendedor.findById(idVendedor);
-        return vendedor;
-    }
+   // @Override
+    //public Optional<Vendedor> comprobarVendedorPorId(int idVendedor) {
+      //  Optional<Vendedor> vendedor = datoVendedor.findById(idVendedor);
+        //return vendedor;
+    //}
 
     @Override
     public List<Producto> listaDeProductos() {
-        //list<Producto> listaProductos = datp
-        return null;
+        return datoProductos.findAll(); //findAll para listar y para buscar por clave primaria
     }
 
 
-  
-   
+    public float montoTotalMes(Date fechaInicial, Date fechaFin){
+        return datoVenta.montoTotalMes(fechaInicial, fechaFin);
+    }
+
+
+    public List<Vendedor> vendedorDniBuscado(int digitosDniVendedor) {
+        //try {
+           // return datoVendedor.vendedorDniBuscado(digitosDniVendedor);
+        return datoVendedor.findByDniVendedorContaining(digitosDniVendedor + "");
+        //}catch(NoSuchElementException e){
+          //  e.printStackTrace();
+            //return null;
+        //}
+    }
+
+    public float menorVentaEfectivo(){
+        return datoVenta.menorVentaEfectivo();
+    }
+
+    public int cantidadProuctoMasVendido(){
+        return datoVenta.cantidadProuctoMasVendido();
+    }
+
+
+    @Override
+    public Optional<Venta> comprobarCodigoVendido(int codigo) {
+        Optional<Venta> v = datoVenta.comprobarCodigoVendido(Integer.valueOf(codigo));
+        return v;
+    }
 }
