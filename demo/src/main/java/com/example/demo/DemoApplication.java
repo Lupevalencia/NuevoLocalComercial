@@ -350,7 +350,7 @@ while(opcion != 0){
 
                     List<Vendedor> listaVendedoresDniBuscado = localComercial.vendedorDniBuscado(dniVendedor);
                     if(listaVendedoresDniBuscado.size() > 0) {
-                        for (Vendedor v : listaVendedoresDniBuscado) {
+                        for (Vendedor v : listaVendedoresDniBuscado) { //también se puede hacer un for así
                             System.out.println("Los vendedores cuyo dni comienza por los digitos introducidos son:\n");
                             System.out.println("NumeroVendedor: " + v.getNumeroVendedor());
                             System.out.println("NombreVendedor: " + v.getNombreVendedor());

@@ -20,6 +20,6 @@ public interface IVendedor extends JpaRepository<Vendedor, Integer> {
     "where dni_vendedor like '%:digitosDniVendedor%'",nativeQuery = true)
     public List<Vendedor> vendedorDniBuscado(@Param("digitosDniVendedor") Integer digitosDniVendedor);
 
-    List<Vendedor> findByDniVendedorContaining(String dni);
+    List<Vendedor> findByDniVendedorContaining(String dni);  //Con jpA mejor
     
 }
